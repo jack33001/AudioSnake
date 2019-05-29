@@ -1,9 +1,10 @@
 package constants;
 
+//store all program constants here
+
 public class Constants {
 	public static final double TIME_STEP = 0.01;
 	public static final int NUM_NOTES = 85;
-	public static final int TEMPO = 120;
 	public static final int MIN_NOTE = 16; //(in other words, the shortest note length allowed)
 	
 	

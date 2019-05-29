@@ -30,36 +30,32 @@ private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 			
 			int numBytesRead = 0;
 			int numFramesRead = 0;
-			
-			//int debug_counter = 0;
+			int debug_counter = 0;
 			
 			while ((numBytesRead = audioInputStream.read(audioBuffer)) != -1) {
 				numFramesRead = numBytesRead / bytesPerFrame;
 				totalFramesRead += numFramesRead;
-				audioDataBytes.add(audioBuffer);
 				
-				/*
-				if (debug_counter % 10 == 0) {
-					for (byte byt : audioDataBytes.get(audioDataBytes.size() - 1)) System.out.print(byt + " ");
-					System.out.println();
-				}
+				byte[] tempBuffer = new byte[audioBuffer.length];
+				for (int i = 0; i < audioBuffer.length; i++) tempBuffer[i] = audioBuffer[i];
+				audioDataBytes.add(tempBuffer);
+				
 				debug_counter++;
-				*/
 			}
 			System.out.println(totalFramesRead);
 			
+			//for (int i = 0; i < 20; i++) System.out.print(audioDataBytes.get(0)[i] + " ");
+			//System.out.println();
 		}
 		catch (Exception e) {
-			
+			System.out.println("Failed to open audio file");
 		}
 	}
 	
 	public byte[] getSampleBlock(int startIndex) { //returns block of samples (from audioDataBytes ArrayList), of size Constants.WAV_BLOCK_SIZE
 		int numSamples = audioDataBytes.get(startIndex).length;
-		for (byte byt : audioDataBytes.get(startIndex)) System.out.print(byt + " ");
 		byte[] output = new byte[numSamples];
 		for (int i = 0; i < numSamples; i++) {
-			System.out.println(audioDataBytes.get(startIndex)[i]);
 			output[i] = audioDataBytes.get(startIndex)[i];
 		}
 		return output;
@@ -68,6 +64,6 @@ private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 	public static void main(String[] args) {
 		System.out.println("Loading .wav file at " + Constants.WAVFILE_LOCATION);
 		WavFile music = new WavFile(Constants.WAVFILE_LOCATION);
-		for (byte byt : music.getSampleBlock(1)) System.out.print(byt + " ");
+		for (byte byt : music.getSampleBlock(5)) System.out.print(byt + " ");
 	}
 }
