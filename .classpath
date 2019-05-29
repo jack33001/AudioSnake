@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="AudioTranscriber files/SongWriter/src"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/ae-awt.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/jl1.0.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/jlayer-1.0.1.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/tritonus_aos.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="AudioTranscriber files/extensionIO_v1.07.jar"/>
+	<classpathentry kind="output" path="AudioTranscriber files/SongWriter/bin"/>
+</classpath>
