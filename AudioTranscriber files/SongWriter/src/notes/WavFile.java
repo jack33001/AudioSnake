@@ -11,8 +11,8 @@ import constants.Constants;
 public class WavFile {
 	
 private int bytesPerFrame;
-private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
-	
+protected ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
+
 	public WavFile(String filePath) {
 		int totalFramesRead = 0;
 		File fileIn = new File(filePath);
@@ -21,7 +21,7 @@ private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(fileIn);
 			
 			bytesPerFrame = audioInputStream.getFormat().getFrameSize();
-			System.out.println(bytesPerFrame);
+			//System.out.println(bytesPerFrame);
 			if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
 				bytesPerFrame = 1;
 			}
@@ -36,19 +36,22 @@ private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 				numFramesRead = numBytesRead / bytesPerFrame;
 				totalFramesRead += numFramesRead;
 				
-				byte[] tempBuffer = new byte[audioBuffer.length];
-				for (int i = 0; i < audioBuffer.length; i++) tempBuffer[i] = audioBuffer[i];
-				audioDataBytes.add(tempBuffer);
+				if (numBytesRead == Constants.WAV_BLOCK_SIZE*bytesPerFrame) {
+					byte[] tempBuffer = new byte[audioBuffer.length];
+					for (int i = 0; i < audioBuffer.length; i++) tempBuffer[i] = audioBuffer[i];
+					audioDataBytes.add(tempBuffer);
+				}
 				
 				debug_counter++;
 			}
 			System.out.println(totalFramesRead);
-			
+			System.out.println("Loaded .wav file at " + Constants.WAVFILE_LOCATION);
+			System.out.printf("Read %d sample blocks", audioDataBytes.size());
 			//for (int i = 0; i < 20; i++) System.out.print(audioDataBytes.get(0)[i] + " ");
 			//System.out.println();
 		}
 		catch (Exception e) {
-			System.out.println("Failed to open audio file");
+			System.out.println("Failed to open audio file: " + e);
 		}
 	}
 	
@@ -61,9 +64,8 @@ private ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 		return output;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("Loading .wav file at " + Constants.WAVFILE_LOCATION);
-		WavFile music = new WavFile(Constants.WAVFILE_LOCATION);
-		for (byte byt : music.getSampleBlock(5)) System.out.print(byt + " ");
+	public static void main(String args[]) {
+		WavFile song = new WavFile(Constants.WAVFILE_LOCATION);
 	}
+	
 }
