@@ -46,7 +46,7 @@ protected ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 			}
 			System.out.println(totalFramesRead);
 			System.out.println("Loaded .wav file at " + Constants.WAVFILE_LOCATION);
-			System.out.printf("Read %d sample blocks", audioDataBytes.size());
+			System.out.printf("Read %d sample blocks\n", audioDataBytes.size());
 			//for (int i = 0; i < 20; i++) System.out.print(audioDataBytes.get(0)[i] + " ");
 			//System.out.println();
 		}
