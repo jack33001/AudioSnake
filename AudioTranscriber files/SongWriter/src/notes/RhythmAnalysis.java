@@ -44,10 +44,6 @@ public class RhythmAnalysis {
 	
 	public static void main(String[] args) {
 		
-		WavFile audioFile = new WavFile("C:\\Users\\pawlakj4700\\Downloads\\island_music_x.wav");
-		System.out.println(new BPMDetection(audioFile).getBPM());
-		
-		
 		int[] noteColumn = {1,1,1,0,0,1,0,1,1,1,1,1,0};
 		RhythmAnalysis testAnalysis = new RhythmAnalysis(noteColumn);
 		
