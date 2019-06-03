@@ -48,6 +48,7 @@ protected ArrayList<byte[]> audioDataBytes = new ArrayList<byte[]>();
 		}
 		catch (Exception e) {
 			System.out.println("Failed to open audio file: " + e);
+			System.exit(0);
 		}
 	}
 	

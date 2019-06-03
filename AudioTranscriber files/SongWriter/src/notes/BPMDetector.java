@@ -10,6 +10,7 @@ public class BPMDetector extends WavFile {
 	private int[] audioEnergyHistoryBuffer = new int[Constants.WAV_BLOCKS_BUFFER_SIZE];
 	private ArrayList<Integer> tempoBuffer = new ArrayList<Integer>();
 	private ArrayList<Integer> beatLocations = new ArrayList<Integer>();
+	private int[] bpm;
 	
 	public BPMDetector(String filePath) {
 		super(filePath);	
@@ -54,18 +55,18 @@ public class BPMDetector extends WavFile {
 		return temp.get(temp.size() / 2);
 	}
 	
-	/*
-	public double[] medianFilter(double[] array) {
-		for (int i = 0; i < array.length; i++) {
-			
+	public int getTempoAt(double time) {
+		int timeIndex = (int) Math.round(time * Constants.WAV_SAMPLE_RATE); //convert seconds to sample
+		int indexCounter = 0;
+		while (indexCounter < getBeatLocations().size() - 1 && timeIndex < getBeatLocations().get(indexCounter)) { //bpms col 1 is index location of beat
+			indexCounter++; 
 		}
-	}
-	*/
-	
-	//returns array of BPM values, each value represents a beat in the song. 
-	public int[] getBPM() {
 		
-		System.out.println("Add time tracking to BPM detection!");
+		if (indexCounter > 0) return (bpm[indexCounter - 1] + bpm[indexCounter])/2; //average of tempos at beats above and below index
+		else return (bpm[0] + bpm[1])/2; //in case we call the method for time 0
+	}
+	
+	public int[] getBPM() {
 		
 		System.out.println("Finding beats...");
 		for (int i = 0; i < (super.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE); i++) {
@@ -76,14 +77,13 @@ public class BPMDetector extends WavFile {
 		}
 		System.out.printf("Found %d beats\n", beatLocations.size());
 		
-		int[] bpm = new int[beatLocations.size()];
+		bpm = new int[beatLocations.size()];
 		
 		for (int i = 1; i < beatLocations.size(); i++) { //use buffer to reduce spikes in tempo
 			tempoBuffer.add((int)(Math.round(60.0 / ((beatLocations.get(i) - beatLocations.get(i - 1)) / 43.0)))); //add bpm value to buffer
 			if (tempoBuffer.size() > Constants.TEMPO_BUFFER_LENGTH) { //if buffer is larger than TEMPO_BUFFER_LENGTH values, remove the oldest buffer value
 				tempoBuffer.remove(0);
 			}
-			
 			bpm[i] = median(tempoBuffer); //return the median value of the tempo as the tempo at that beat.
 		}
 		return bpm;
@@ -123,8 +123,13 @@ public class BPMDetector extends WavFile {
 			timesArr[i] = times.get(i);
 		}
 		
-		for (int i = 0; i < beatTimes.length; i++) {
-			beatTimes[i] = detector.getBeatLocations().get(i)*Constants.WAV_BLOCK_SIZE/Constants.WAV_SAMPLE_RATE;
+		detector.getBeatLocations(); //create beat locations array 
+		for (int i = 0; i < timesArr[timesArr.length - 1]; i++) {
+			beatTimes[i] = detector.getTempoAt(i);
+		}
+		
+		for (double tempo : beatTimes) {
+			System.out.println(tempo);
 		}
 		
 		Plot2D plot = new Plot2D("Sound Energy", "Seconds", "Energy", 1600, 600);

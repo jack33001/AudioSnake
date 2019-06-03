@@ -13,6 +13,6 @@
 	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/tritonus_aos.jar"/>
 	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/tritonus_share.jar"/>
 	<classpathentry kind="lib" path="AudioTranscriber files/extensionIO_v1.07.jar"/>
-	<classpathentry kind="lib" path="/Users/pawlak/Downloads/xchart-3.5.4/xchart-3.5.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pawlakj4700/Documents/GitHub/AudioSnake/AudioTranscriber files/SongWriter/lib/xchart-3.5.4.jar"/>
 	<classpathentry kind="output" path="AudioTranscriber files/SongWriter/bin"/>
 </classpath>
