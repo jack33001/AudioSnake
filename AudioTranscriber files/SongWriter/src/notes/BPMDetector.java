@@ -1,4 +1,4 @@
-package notes;
+	package notes;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +9,14 @@ import util.Plot2D;
 public class BPMDetector extends WavFile {
 	private int[] audioEnergyHistoryBuffer = new int[Constants.WAV_BLOCKS_BUFFER_SIZE];
 	private ArrayList<Integer> tempoBuffer = new ArrayList<Integer>();
+	private ArrayList<Integer> beatLocations = new ArrayList<Integer>();
 	
 	public BPMDetector(String filePath) {
 		super(filePath);	
+	}
+	
+	public ArrayList<Integer> getBeatLocations() {
+		return beatLocations;
 	}
 	
 	//find instantaneous energy by looking at last 1024 frames (~1/43rd second) and finding total energy
@@ -62,14 +67,12 @@ public class BPMDetector extends WavFile {
 		
 		System.out.println("Add time tracking to BPM detection!");
 		
-		ArrayList<Integer> beatLocations = new ArrayList<Integer>();
-		
 		System.out.println("Finding beats...");
 		for (int i = 0; i < (super.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE); i++) {
 			if (isBeat(i)) {
 				beatLocations.add(i);
 			}
-			if (i % 1000 == 0) System.out.printf("Searched %d of %d samples\n", i, super.audioDataBytes.size());
+			if (i % 1000 == 0) System.out.printf("Searched %d of %d blocks\n", i, super.audioDataBytes.size());
 		}
 		System.out.printf("Found %d beats\n", beatLocations.size());
 		
@@ -82,8 +85,6 @@ public class BPMDetector extends WavFile {
 			}
 			
 			bpm[i] = median(tempoBuffer); //return the median value of the tempo as the tempo at that beat.
-			//System.out.println(beatLocations.get(i) / Constants.WAV_BLOCKS_PER_SECOND);
-			//System.out.println(bpm[i]);
 		}
 		return bpm;
 	}
@@ -100,8 +101,10 @@ public class BPMDetector extends WavFile {
 		ArrayList<Double> instantEnergies = new ArrayList<Double>();
 		ArrayList<Double> times = new ArrayList<Double>();
 		
-		for (int i = 0; i < 4000; i++) {//(detector.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE); i++) {
-			if (i % 1000 == 0) System.out.printf("Found energy for %d of %d blocks\n", i, detector.audioDataBytes.size());
+		int maxGraphBlock = detector.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE;
+		
+		for (int i = 0; i < maxGraphBlock; i++) {
+			if (i % 1000 == 0) System.out.printf("Found energy for %d of %d blocks\n", i, maxGraphBlock);
 			averageEnergies.add(detector.getLocalAverageEnergy(i));
 			instantEnergies.add((double)detector.getLocalInstantEnergy(i));
 			times.add((double)i * Constants.WAV_BLOCK_SIZE / Constants.WAV_SAMPLE_RATE);
@@ -109,20 +112,29 @@ public class BPMDetector extends WavFile {
 
 		double[] averageEnergiesArr = new double[averageEnergies.size()];
 		double[] instantEnergiesArr = new double[instantEnergies.size()];
+		double[] thresholdEnergiesArr = new double[averageEnergies.size()];
 		double[] timesArr = new double[times.size()];
+		double[] beatTimes = new double[detector.getBeatLocations().size()];
 		
 		for (int i = 0; i < averageEnergiesArr.length; i++) {
 			averageEnergiesArr[i] = averageEnergies.get(i);
 			instantEnergiesArr[i] = instantEnergies.get(i);
+			thresholdEnergiesArr[i] = averageEnergies.get(i)*Constants.ENERGY_PULSE_CONSTANT;
 			timesArr[i] = times.get(i);
 		}
-		Plot2D plot = new Plot2D("Sound Energy", "Seconds", "Energy");
+		
+		for (int i = 0; i < beatTimes.length; i++) {
+			beatTimes[i] = detector.getBeatLocations().get(i)*Constants.WAV_BLOCK_SIZE/Constants.WAV_SAMPLE_RATE;
+		}
+		
+		Plot2D plot = new Plot2D("Sound Energy", "Seconds", "Energy", 1600, 600);
 		plot.addData("Instantaneous Energy", timesArr, instantEnergiesArr);
 		plot.addData("Average Energy", timesArr, averageEnergiesArr);
+		plot.addData("Threshold Energy", timesArr, thresholdEnergiesArr);
 		plot.showPlot();
 		
-		Plot2D plot2 = new Plot2D("BPM", "Index", "BPM");
-		plot2.addData("BPM", Plot2D.toDoubleArray(bpms));
+		Plot2D plot2 = new Plot2D("BPM", "Seconds", "BPM");
+		plot2.addData("BPM", beatTimes, Plot2D.toDoubleArray(bpms));
 		plot2.showPlot();
 		
 	}

@@ -14,10 +14,18 @@ public class Plot2D {
 	private XYChart chart;
 	private double[] xData;
 	private double[] yData;
+	private String title;
 	
     public Plot2D(String title, String xAxis, String yAxis) { //plot with respect to index
     	chart = new XYChartBuilder().width(1200).height(600).title(title).xAxisTitle(xAxis).yAxisTitle(yAxis).build();
     	chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Line);
+    	this.title = title;
+    }
+    
+    public Plot2D(String title, String xAxis, String yAxis, int width, int height) { //plot with respect to index
+    	chart = new XYChartBuilder().width(width).height(height).title(title).xAxisTitle(xAxis).yAxisTitle(yAxis).build();
+    	chart.getStyler().setDefaultSeriesRenderStyle(XYSeriesRenderStyle.Line);
+    	this.title = title;
     }
     
     public void addData(String label, double[] data) {
@@ -41,8 +49,8 @@ public class Plot2D {
     
     public void showPlot() throws IOException {
     	
-    	System.out.println("Plotting...");
-    	BitmapEncoder.saveBitmapWithDPI(chart, "./Sound_Energy_Graph_300_DPI", BitmapFormat.PNG, 300);
+    	System.out.printf("Plotting %s...\n", title);
+    	BitmapEncoder.saveBitmapWithDPI(chart, title, BitmapFormat.BMP, 300);
     	// Show it
     	new SwingWrapper(chart).displayChart();
     }
