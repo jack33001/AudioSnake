@@ -50,7 +50,7 @@ public class Plot2D {
     public void showPlot() throws IOException {
     	
     	System.out.printf("Plotting %s...\n", title);
-    	BitmapEncoder.saveBitmapWithDPI(chart, title, BitmapFormat.BMP, 300);
+    	BitmapEncoder.saveBitmapWithDPI(chart, title, BitmapFormat.PNG, 300);
     	// Show it
     	new SwingWrapper(chart).displayChart();
     }
