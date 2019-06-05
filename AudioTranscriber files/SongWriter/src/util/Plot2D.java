@@ -46,13 +46,15 @@ public class Plot2D {
     		if (yData[i] < 0) yData[i] = 0;
     	}
     }
-    
-    public void showPlot() throws IOException {
+ 
+	public void showPlot() {
     	
     	System.out.printf("Plotting %s...\n", title);
-    	BitmapEncoder.saveBitmapWithDPI(chart, title, BitmapFormat.PNG, 300);
-    	// Show it
     	new SwingWrapper(chart).displayChart();
+    }
+    
+    public void savePlot() throws IOException {
+    	BitmapEncoder.saveBitmapWithDPI(chart, title, BitmapFormat.PNG, 300);
     }
     
     public static double[] toDoubleArray(byte[] byteArray) {
