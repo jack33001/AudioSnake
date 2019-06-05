@@ -13,7 +13,8 @@ public class BPMDetector extends WavFile {
 	private int[] bpm = null;
 	
 	public BPMDetector(String filePath) {
-		super(filePath);	
+		super(filePath);
+		getBPM();
 	}
 	
 	public ArrayList<Integer> getBeatLocations() { //returns ArrayList of beat indices, based on sample block list
@@ -60,7 +61,9 @@ public class BPMDetector extends WavFile {
 	}
 	
 	public int getTempoAt(double time) {
-		if (bpm == null) getBPM(); //if we haven't already searched for all the beats in the song, do it before running this script
+		if (bpm == null) {
+			getBPM(); //if we haven't already searched for all the beats in the song, do it before running this script
+		}
 		int timeIndex = (int) Math.round(time * Constants.WAV_SAMPLE_RATE/Constants.WAV_BLOCK_SIZE); //convert seconds to sample
 		int indexCounter = 0;
 		while (indexCounter < getBeatLocations().size() - 1 && timeIndex > getBeatLocations().get(indexCounter)) {
