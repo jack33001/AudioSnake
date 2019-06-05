@@ -59,6 +59,49 @@ public class Snake extends JPanel implements ActionListener {
 		accX = Math.random() * 0.4 - 0.2;
 		velX = velX + accX;
 		
+		//randomly change color
+		/*double redRando = Math.random() * 11.0 - 5.0;
+		if (redRando < 0) {
+			red += 0.01;
+		}
+		if (redRando > 0) {
+			red -= 0.01;
+		}
+		if (red < 10) {
+			red += 0.02;
+		}
+		if (red > 240) {
+			red -= 0.02;
+		}
+		
+		double greenRando = Math.random() - 0.5;
+		if (greenRando > 0) {
+			green += 0.01;
+		}
+		if (greenRando < 0) {
+			green -= 0.01;
+		}
+		if (green < 10) {
+			green += 0.02;
+		}
+		if (green > 240) {
+			green -= 0.02;
+		}
+		
+		double blueRando = Math.random() - 0.5;
+		if (blueRando > 0) {
+			blue += 0.01;
+		}
+		if (blueRando < 0) {
+			blue -= 0.01;
+		}
+		if (blue < 10) {
+			blue += 0.02;
+		}
+		if (blue > 240) {
+			blue -= 0.02;
+		}*/
+		
 		
 		
 		int currentTempo = myDetector.getTempoAt((System.currentTimeMillis() - start)/1000.0);
@@ -137,13 +180,16 @@ public class Snake extends JPanel implements ActionListener {
 		//System.out.println(Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
-		System.out.println("current tempo:" + currentTempo);
-		System.out.println("current speed:" + speed);
+		//System.out.println("current tempo:" + currentTempo);
+		//System.out.println("current speed:" + speed);
 		
 	
-		System.out.println((System.currentTimeMillis() - start)/1000.0);
+		//System.out.println((System.currentTimeMillis() - start)/1000.0);
 		//System.out.println("adder:" + greenRando);
-		//System.out.println(red);
+		System.out.println("red:" + redRando);
+		System.out.println("green:" + greenRando);
+		System.out.println("blue:" + blueRando);
+		
 		
 		y = y + velY;
 		x = x + velX;
