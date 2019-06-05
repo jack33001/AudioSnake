@@ -76,6 +76,8 @@ public class BPMDetector extends WavFile {
 	public int[] getBPM() {
 		
 		System.out.println("\nFinding beats...");
+		
+		//hunt through all the song's sample blocks, and add the block index to beatLocations if it is a beat
 		for (int i = 0; i < (super.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE); i++) {
 			if (isBeat(i)) {
 				beatLocations.add(i);
@@ -120,8 +122,9 @@ public class BPMDetector extends WavFile {
 		double[] instantEnergiesArr = new double[instantEnergies.size()];
 		double[] thresholdEnergiesArr = new double[averageEnergies.size()];
 		double[] timesArr = new double[times.size()];
-		double[] timeBeats = new double[detector.getSongLength()];
-		double[] beatTimes = new double[timeBeats.length];
+		
+		double[] tempoArr = new double[detector.getSongLength()];
+		double[] beatTimes = new double[tempoArr.length];
 		
 		//store data for plotting energy
 		for (int i = 0; i < averageEnergiesArr.length; i++) {
@@ -134,7 +137,7 @@ public class BPMDetector extends WavFile {
 		//store data for plotting bpm
 		detector.getBeatLocations(); //create beat locations array 
 		for (int i = 0; i < detector.getSongLength(); i++) {
-			timeBeats[i] = detector.getTempoAt(i);
+			tempoArr[i] = detector.getTempoAt(i);
 			beatTimes[i] = i;
 		}
 		
@@ -145,7 +148,7 @@ public class BPMDetector extends WavFile {
 		plot.showPlot();
 		
 		Plot2D plot2 = new Plot2D("BPM", "Seconds", "BPM");
-		plot2.addData("BPM", beatTimes, timeBeats);
+		plot2.addData("BPM", beatTimes, tempoArr);
 		plot2.showPlot();
 	}
 }
