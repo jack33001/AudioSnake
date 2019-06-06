@@ -17,8 +17,11 @@ public class Snake extends JPanel implements ActionListener {
 	
 	static int boardSizex = 1000;
 	static int boardSizey = 1000;
-	static int snakeWidth = 5;
-	static int snakeLength = 5;
+	static int baseSnakeWidth = 5;
+	static int baseSnakeLength = 5;
+	int snakeWidth;
+	int snakeLength;
+	double averageEnergy;
 	
 	Timer tm = new Timer(10, this);		//5 milliseconds
 	double x = 500;
@@ -32,13 +35,12 @@ public class Snake extends JPanel implements ActionListener {
 	double randomYVel = 0;
 	int negate = 0;
 	int tempo = 250;
-	int tempoSize = 50;
-	double[] tempos = new double[tempoSize];
 	int red = 125;
 	int green = 125;
 	int blue = 125;
 	private BPMDetector myDetector = new BPMDetector(Constants.WAVFILE_LOCATION);
 	long start = (long)System.currentTimeMillis();
+	int loopCounter = 0;
 	
 	
 	public void paintComponent(Graphics g) 
@@ -52,6 +54,17 @@ public class Snake extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		double currentTime = (System.currentTimeMillis() - start)/1000.0;
+		
+		myDetector.getLocalInstantEnergy(currentTime);
+		int currentTempo = myDetector.getTempoAt(currentTime);
+		speed = Math.pow(currentTempo / 100.0, 2);
+		
+		//update snake size values based on energy values. Don't update averageEnergy loop iteration because getLocalAverageEnergy() is a slow function.
+		if (loopCounter % 10 == 0) averageEnergy = myDetector.getLocalAverageEnergy(currentTime);
+		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
+		snakeWidth = (int)Math.round(baseSnakeWidth * Math.pow(energyProp, 2.5));
+		snakeLength = snakeWidth;
 		
 		accY = Math.random() * 0.4 - 0.2;
 		velY = velY + accY;
@@ -101,12 +114,6 @@ public class Snake extends JPanel implements ActionListener {
 		if (blue > 240) {
 			blue -= 0.02;
 		}*/
-		
-		
-		
-		int currentTempo = myDetector.getTempoAt((System.currentTimeMillis() - start)/1000.0);
-		speed = currentTempo / 100.0;
-		
 		
 		if (y < 200) {
 			accY += 0.01;
@@ -180,15 +187,16 @@ public class Snake extends JPanel implements ActionListener {
 		//System.out.println(Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
-		//System.out.println("current tempo:" + currentTempo);
-		//System.out.println("current speed:" + speed);
+		System.out.println("Current size: " + snakeWidth + ", " + (myDetector.getLocalInstantEnergy(currentTime) + " " + averageEnergy));
+		System.out.println("Current tempo: " + currentTempo);
+		System.out.println("Current speed: " + speed + "\n");
 		
 	
 		//System.out.println((System.currentTimeMillis() - start)/1000.0);
 		//System.out.println("adder:" + greenRando);
-		System.out.println("red:" + redRando);
-		System.out.println("green:" + greenRando);
-		System.out.println("blue:" + blueRando);
+		//System.out.println("red:" + redRando);
+		//System.out.println("green:" + greenRando);
+		//System.out.println("blue:" + blueRando);
 		
 		
 		y = y + velY;

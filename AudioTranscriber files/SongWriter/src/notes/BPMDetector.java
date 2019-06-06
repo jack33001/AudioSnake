@@ -35,6 +35,13 @@ public class BPMDetector extends WavFile {
 		return energy;
 	}
 	
+	public double getLocalInstantEnergy(double time) {
+		
+		int index = (int) Math.round(time * Constants.WAV_SAMPLE_RATE/Constants.WAV_BLOCK_SIZE); //convert seconds to sample
+		
+		return getLocalInstantEnergy(index);
+	}
+	
 	//find average energy for last second by averaging instantaneous energies
 	private double getLocalAverageEnergy(int index) { 
 		for (int i = index; i < index + Constants.WAV_BLOCKS_BUFFER_SIZE; i++) {
@@ -46,6 +53,12 @@ public class BPMDetector extends WavFile {
 			sum += instEnergy;
 		}	
 		return sum / audioEnergyHistoryBuffer.length;
+	}
+	
+	public double getLocalAverageEnergy(double time) {
+		int index = (int) Math.round(time * Constants.WAV_SAMPLE_RATE/Constants.WAV_BLOCK_SIZE); //convert seconds to sample
+
+		return getLocalAverageEnergy(index);
 	}
 	
 	//if the instantaneous energy is a certain threshold above average, we say it's a beat
@@ -82,7 +95,7 @@ public class BPMDetector extends WavFile {
 		
 		//hunt through all the song's sample blocks, and add the block index to beatLocations if it is a beat
 		for (int i = 0; i < (super.audioDataBytes.size() - Constants.WAV_BLOCKS_BUFFER_SIZE); i++) {
-			if (isBeat(i)) {
+			if (isBeat(i) && !isBeat(i - 1) && !isBeat(i - 2)) {
 				beatLocations.add(i);
 			}
 			if (i % 1000 == 0) System.out.printf("Searched %d of %d blocks\n", i, super.audioDataBytes.size());
