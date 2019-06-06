@@ -38,9 +38,15 @@ public class Snake extends JPanel implements ActionListener {
 	int red = 125;
 	int green = 125;
 	int blue = 125;
-	private BPMDetector myDetector = new BPMDetector(Constants.WAVFILE_LOCATION);
-	long start = (long)System.currentTimeMillis();
+	BPMDetector myDetector;
+	long start;
 	int loopCounter = 0;
+	
+	public Snake(BPMDetector myDetector) {
+		this.myDetector = myDetector;
+		
+		//set averageEnergy equal to energy of whole song
+	}
 	
 	
 	public void paintComponent(Graphics g) 
@@ -63,7 +69,7 @@ public class Snake extends JPanel implements ActionListener {
 		//update snake size values based on energy values. Don't update averageEnergy loop iteration because getLocalAverageEnergy() is a slow function.
 		if (loopCounter % 10 == 0) averageEnergy = myDetector.getLocalAverageEnergy(currentTime);
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
-		snakeWidth = (int)Math.round(baseSnakeWidth * Math.pow(energyProp, 2.5));
+		snakeWidth = (int)Math.round(baseSnakeWidth * Math.pow(energyProp, Constants.PULSE_FACTOR));
 		snakeLength = snakeWidth;
 		
 		accY = Math.random() * 0.4 - 0.2;
@@ -207,18 +213,17 @@ public class Snake extends JPanel implements ActionListener {
 		}
 	
 		
-	public static void main(String[] args)
+	public void startSnake()
 	{
-		
-		Snake r = new Snake();
 		JFrame jf = new JFrame();
 		jf.setTitle("Snake");
 		jf.setSize(boardSizex, boardSizey);
 		jf.setVisible(true);
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.add(r);
+		jf.add(this);
 		jf.setVisible(true);
+		start = (long)System.currentTimeMillis();
 		}
 	}
 
