@@ -88,7 +88,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		else if(ae.getSource() == playButton )
 		{
 			try {
-				if(list.getSelectedIndex()==0)
+			
 				{
 					sound = new File(musics[list.getSelectedIndex()]);
 					ais = AudioSystem.getAudioInputStream(sound);
@@ -98,14 +98,6 @@ public class MusicPlayer extends JPanel implements ActionListener {
 					System.out.println(selectedFile);
 				}
 				
-				else if(list.getSelectedIndex()==2)
-				{
-					sound = new File(musics[list.getSelectedIndex()]);
-					ais = AudioSystem.getAudioInputStream(sound);
-					clip = AudioSystem.getClip();
-					clip.open(ais);
-					clip.start();
-				}
 			
 			}catch(Exception e) {JOptionPane.showMessageDialog(null, e);}
 			
