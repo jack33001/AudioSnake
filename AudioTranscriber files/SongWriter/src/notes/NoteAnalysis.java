@@ -1,4 +1,6 @@
 package notes;
+
+import java.util.ArrayList;
 import constants.Constants;
 
 //Use this frequency chart for pitch reference: http://pages.mtu.edu/~suits/notefreqs.html
@@ -56,12 +58,12 @@ public class NoteAnalysis {
 		return (char)(65 + minFreq) + "" + (Math.round(minNote));
 	}
 	
-	public static int[] getNotes(double[] frequencies) {
+	public static int[] getNotes(ArrayList<Integer> frequencies) {
 		int[] noteArr = new int[Constants.NUM_NOTES];
 		for (int i = 0; i < noteArr.length; i++) noteArr[i] = 0;
 		
-		for (int i = 0; i < frequencies.length; i++) {
-			String note = getNote(frequencies[i]);	
+		for (int i = 0; i < frequencies.size(); i++) {
+			String note = getNote(frequencies.get(i));	
 			int noteVal;
 			
 			switch (note.charAt(0)) {
@@ -95,14 +97,5 @@ public class NoteAnalysis {
 		}
 		
 		return noteArr;
-	}
-
-	
-	public static void main(String[] args) {
-		double[] frequencies = {16.35, 18.35, 20.6, 23.12, 29.14, 24.5, 2093.0};
-		
-		int notes[] = getNotes(frequencies);
-		
-		for (int note : notes) System.out.print(note + " ");
 	}
 }

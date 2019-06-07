@@ -17,8 +17,8 @@ public class Snake extends JPanel implements ActionListener {
 	
 	static int boardSizex = 1000;
 	static int boardSizey = 1000;
-	static int baseSnakeWidth = 5;
-	static int baseSnakeLength = 5;
+	static int baseSnakeWidth = 3;
+	static int baseSnakeLength = 3;
 	int snakeWidth;
 	int snakeLength;
 	double averageEnergy;
@@ -45,6 +45,16 @@ public class Snake extends JPanel implements ActionListener {
 	public Snake(BPMDetector myDetector) {
 		this.myDetector = myDetector;
 		
+		int sum = 0;
+		int count = 0;
+		
+		//calculate average energy for song, ignoring first few and last few seconds
+		for (int i = Constants.FADE_CONST; i < myDetector.getSongLength() - Constants.FADE_CONST; i++) {
+			sum += myDetector.getLocalAverageEnergy(i);
+			count++;
+		}
+		averageEnergy = sum / count;
+		
 		//set averageEnergy equal to energy of whole song
 	}
 	
@@ -64,10 +74,9 @@ public class Snake extends JPanel implements ActionListener {
 		
 		myDetector.getLocalInstantEnergy(currentTime);
 		int currentTempo = myDetector.getTempoAt(currentTime);
-		speed = Math.pow(currentTempo / 100.0, 2);
+		speed = Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
 		
-		//update snake size values based on energy values. Don't update averageEnergy loop iteration because getLocalAverageEnergy() is a slow function.
-		if (loopCounter % 10 == 0) averageEnergy = myDetector.getLocalAverageEnergy(currentTime);
+		//update snake size values based on energy values.
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
 		snakeWidth = (int)Math.round(baseSnakeWidth * Math.pow(energyProp, Constants.PULSE_FACTOR));
 		snakeLength = snakeWidth;
