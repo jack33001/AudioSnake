@@ -95,6 +95,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 					clip = AudioSystem.getClip();
 					clip.open(ais);
 					clip.start();
+					System.out.println(selectedFile);
 				}
 				
 				else if(list.getSelectedIndex()==2)
