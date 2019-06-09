@@ -17,8 +17,8 @@ public class Snake extends JPanel implements ActionListener {
 	
 	static int boardSizex = 1000;
 	static int boardSizey = 1000;
-	static int baseSnakeWidth = 3;
-	static int baseSnakeLength = 3;
+	static int baseSnakeWidth = Constants.baseSnakeSize;
+	static int baseSnakeLength = Constants.baseSnakeSize;
 	int snakeWidth;
 	int snakeLength;
 	double averageEnergy;
@@ -63,7 +63,7 @@ public class Snake extends JPanel implements ActionListener {
 	{
 		Color mySnake = new Color(red, green, blue);
 		g.setColor(mySnake);
-		g.fillRect((int) x, (int) y, snakeWidth, snakeLength);
+		g.fillRect((int) x - snakeWidth/2, (int) y - snakeLength/2, snakeWidth, snakeLength);
 		
 		tm.start();
 	}
