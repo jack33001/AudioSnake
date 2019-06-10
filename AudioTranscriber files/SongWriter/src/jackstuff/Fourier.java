@@ -140,17 +140,7 @@ public class Fourier {
 			
 				
 			average[n] = median + (storeval * Constants.NOTE_THRESHOLD);
-		}
-		
-		
-		if (k % 1000 == 0) {
-			Plot2D plot = new Plot2D( "Fourier Transform Iteration " + (k + 1), "Index", "Amplitude",1024,512 );
-			plot.addData( "Amplitudes", dfrequencypeaks);
-			plot.addData( "Average", average);
-			plot.addData( "Linear Average", constavg);
-			plot.showPlot();
-		}
-		
+		}		
 		
 		//Finds peaks and fills an arraylist with their indices
 				ArrayUnpacking.ArraySorter(freqpeaks, average);

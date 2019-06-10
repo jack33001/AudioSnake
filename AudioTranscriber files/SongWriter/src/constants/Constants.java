@@ -26,5 +26,11 @@ public class Constants {
 	
 	public static final double NOTE_THRESHOLD = 4/75; //threshold to register note frequencies as valid melody notes
 	
+	/*
+	 * Determined constant values:
+	 * Hells Bells: 5.5
+	 * Superstition: 4.75
+	 */
+	
 	
 }
