@@ -65,11 +65,11 @@ public class Snake extends JPanel implements ActionListener {
 	{
 		Color mySnake = new Color(red, green, blue);
 		g.setColor(mySnake);
-<<<<<<< HEAD
+
 		g.fillOval((int) (x - snakeWidth/2), (int) (y - snakeLength/2), snakeWidth, snakeLength);
-=======
+
 		g.fillRect((int) x - snakeWidth/2, (int) y - snakeLength/2, snakeWidth, snakeLength);
->>>>>>> 9a3903639c5d770fc6e1c6bbb37954ee05c3ad4b
+
 		
 		tm.start();
 	}
