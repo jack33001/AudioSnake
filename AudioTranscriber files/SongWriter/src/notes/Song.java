@@ -20,7 +20,7 @@ public class Song {
 	
 	public int[] getNotesAt(double time) {
 		for (int i = 0; i < songTable.length; i++) {
-			if (time < i*Constants.TIME_STEP) {
+			if (i*Constants.TIME_STEP > time) {
 				return songTable[i];
 			}
 		}
