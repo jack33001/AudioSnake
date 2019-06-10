@@ -19,6 +19,8 @@ public class Constants {
 	 */
 	
 	public static final int TEMPO_BUFFER_LENGTH = 11; //number of values to find median of for bpm array. Should be an odd number
-	public static final double PULSE_FACTOR = 4;
+	public static final double PULSE_FACTOR = 3;
+	public static final int FADE_CONST = 10;
+	public static final int baseSnakeSize = 5;
 	
 }
