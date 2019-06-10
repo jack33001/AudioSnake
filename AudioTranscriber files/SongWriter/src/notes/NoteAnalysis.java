@@ -44,16 +44,19 @@ public class NoteAnalysis {
 				//System.out.println(minNote);
 				
 				if (minNote - Math.round(minNote) < 0) { //make sure we only get sharp notes
+					if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
 					System.out.println((char)(64 + minFreq) + "#" + (Math.round(minNote)));
 					return (char)(64 + minFreq) + "#" + (Math.round(minNote));
 				}
 				else {
+					if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
 					System.out.println((char)(65 + minFreq) + "#" + (Math.round(minNote)));
 					return (char)(65 + minFreq) + "#" + (Math.round(minNote));
 				}
 			}
 		}
-
+		
+		if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
 		System.out.println((char)(65 + minFreq) + "" + (Math.round(minNote)));
 		return (char)(65 + minFreq) + "" + (Math.round(minNote));
 	}
