@@ -425,9 +425,11 @@ public class Snake extends JPanel implements ActionListener {
 		x = x + velX;
 			
 		repaint();
-		}
+		
 	
 		}
+		}
+	}
 				
 					
 	
