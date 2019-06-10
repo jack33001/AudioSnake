@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 import constants.Constants;
 import notes.BPMDetector;
+import notes.Song;
 
 public class Snake extends JPanel implements ActionListener {
 	
@@ -43,9 +44,11 @@ public class Snake extends JPanel implements ActionListener {
 	int loopCounter = 0;
 	double colorChange = 0.1;
 	int noteCounter = 0;
+	int[][] bigArray;
 	
-	public Snake(BPMDetector myDetector) {
+	public Snake(BPMDetector myDetector, Song mySong) {
 		this.myDetector = myDetector;
+		bigArray = mySong.getSongTable();
 		
 		int sum = 0;
 		int count = 0;
