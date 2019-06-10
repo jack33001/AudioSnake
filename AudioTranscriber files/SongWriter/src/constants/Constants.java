@@ -3,7 +3,8 @@ package constants;
 //store all program constants here
 
 public class Constants {
-	public static final int NUM_NOTES = 85;
+	public static final int HIGHEST_OCTAVE = 7;
+	public static final int NUM_NOTES = 12*HIGHEST_OCTAVE;
 	
 	public static final String WAVFILE_LOCATION = "samples/Superstition.wav";
 	public static final int WAV_SAMPLE_RATE = 44100;
