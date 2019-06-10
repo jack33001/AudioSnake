@@ -20,7 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import constants.Constants;
+import jackstuff.Fourier;
 import notes.BPMDetector;
+import notes.Song;
 import snake.Snake;
 import util.AePlayWave;
 
@@ -29,8 +31,8 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	JLabel info = new JLabel("pl0x don't play the next song until the first song is over.");
 	JButton addButton = new JButton("Add Music");
 	JButton playButton = new JButton("Play");
-	//JFrame stopButton = new JFrame("Stop");
-	Font customFont = new Font("",Font.BOLD,20);
+	// JFrame stopButton = new JFrame("Stop");
+	Font customFont = new Font("", Font.BOLD, 20);
 	JComboBox list = new JComboBox();
 	JFileChooser browser = new JFileChooser();
 	FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV Sound", "wav");
@@ -41,34 +43,33 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	File sound;
 	AudioInputStream ais;
 	Clip clip;
-	
-	public MusicPlayer()
-	{
+
+	public MusicPlayer() {
 		this.setBackground(Color.BLACK);
 		window.add(this);
-		
+
 		addButton.addActionListener(this);
 		playButton.addActionListener(this);
-		//stopButton.addActionListener(this);
-		
-		info.setFont(new Font("",Font.ITALIC,15));
-		window.add(info,BorderLayout.PAGE_END);
-		
+		// stopButton.addActionListener(this);
+
+		info.setFont(new Font("", Font.ITALIC, 15));
+		window.add(info, BorderLayout.PAGE_END);
+
 		addButton.setFont(customFont);
-		window.add(addButton,BorderLayout.LINE_START);
-		
+		window.add(addButton, BorderLayout.LINE_START);
+
 		playButton.setFont(customFont);
-		window.add(playButton,BorderLayout.CENTER);
-		
-		//stopButton.setFont(customFont);
-		//window.add(image,BorderLayout.LINE_END);
-		
-		window.add(list,BorderLayout.PAGE_START);
-		
+		window.add(playButton, BorderLayout.CENTER);
+
+		// stopButton.setFont(customFont);
+		// window.add(image,BorderLayout.LINE_END);
+
+		window.add(list, BorderLayout.PAGE_START);
+
 		browser.setFileFilter(filter);
-		
-		window.setSize(400,200);
-		window.setLocation(750,350);
+
+		window.setSize(400, 200);
+		window.setLocation(750, 350);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}
@@ -94,9 +95,9 @@ public class MusicPlayer extends JPanel implements ActionListener {
 			try {
 			
 				{
-					
-					BPMDetector myDetector = new BPMDetector(selectedFile.toString()); //create BPMDetector object (automatically finds all beats)
-					Snake snake = new Snake(myDetector); //create snake object
+					Song music = new Song(Fourier.FFTFile(selectedFile.toString()));
+					BPMDetector detector = new BPMDetector(selectedFile.toString()); //create BPMDetector object (automatically finds all beats)
+					Snake snake = new Snake(detector, music); //create snake object
 				    					
 					sound = new File(musics[list.getSelectedIndex()]);
 					ais = AudioSystem.getAudioInputStream(sound);

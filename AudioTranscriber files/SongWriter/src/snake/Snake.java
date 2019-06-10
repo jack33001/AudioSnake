@@ -114,6 +114,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 0) {
 						blue -= colorChange;
 					}
+				}
 					
 				if (noteCounter % 12 == 1) {	//c# is yellow-green (102 - 255 - 102)
 					if (red < 102) {
@@ -131,6 +132,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 102) {
 						blue -= colorChange;
 					}
+				}
 					
 				if (noteCounter % 12 == 2) {	//d is green (0 - 204 - 0)
 					if (red > 0) {
@@ -145,6 +147,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 0) {
 						blue -= colorChange;
 					}
+				}
 				if (noteCounter % 12 == 3) {	//d# is green-blue (51 - 153 - 255)
 					if (red < 51) {
 						red += colorChange;
@@ -161,6 +164,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue < 254) {
 						blue += colorChange;
 					}
+				}
 				if (noteCounter % 12 == 4) {	//e is blue (0 - 0 - 255)
 					if (red > 0) {
 						red -= colorChange;
@@ -171,6 +175,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue < 254) {
 						blue += colorChange;
 					}
+				}
 				if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
 					if (red > 0) {
 						red -= colorChange;
@@ -184,6 +189,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 153) {
 						blue -= colorChange;
 					}
+				}
 				if (noteCounter % 12 == 6) {	//f# is dark dark blue (0 - 0 - 200)
 					if (red > 0) {
 						red -= colorChange;
@@ -197,6 +203,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 200) {
 						blue -= colorChange;
 					}
+				}
 				if (noteCounter % 12 == 7) { //g is violet (102 - 0 - 153)
 					if (red < 102) {
 						red += colorChange;
@@ -209,9 +216,12 @@ public class Snake extends JPanel implements ActionListener {
 					}
 					if (blue < 153) {
 						blue += colorChange;
+					}
 					if (blue > 153) {
 						blue -= colorChange;
 					}
+				}
+					
 				if (noteCounter % 12 == 8) {	//g# (209 - 0 - 190)
 					if (red < 209) {
 						red += colorChange;
@@ -228,6 +238,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue < 190) {
 						blue += colorChange;
 					}
+				}
 				if (noteCounter % 12 == 9) {		//a is red (255-0-0)
 					if (red < 255) {
 						red += colorChange;
@@ -238,6 +249,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 0) {
 						blue -= colorChange;
 					}
+				}
 				if (noteCounter % 12 == 10) {		//a# (255 - 153 - 51)
 					if (red < 255) {
 						red += colorChange;
@@ -254,6 +266,7 @@ public class Snake extends JPanel implements ActionListener {
 					if (blue > 51) {
 						blue -= colorChange;
 					}
+				}
 				if (noteCounter % 12 == 11) {		//b is orange (255-102-0)
 					if (red < 255) {
 						red += colorChange;
@@ -348,10 +361,12 @@ public class Snake extends JPanel implements ActionListener {
 		}
 		
 			
-		if (x < 0||x > boardSizex - 40)
+		if (x < 0||x > boardSizex - 40) {
 			velX = -velX;
-		if (y < 0||y > boardSizey - 40)
+		}
+		if (y < 0||y > boardSizey - 40) {
 			velY = -velY;
+		}
 		
 		double xSqr = velX * velX;
 		double ySqr = velY * velY;
@@ -410,6 +425,7 @@ public class Snake extends JPanel implements ActionListener {
 		x = x + velX;
 			
 		repaint();
+		}
 	
 		}
 	
