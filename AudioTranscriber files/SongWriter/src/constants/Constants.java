@@ -24,4 +24,7 @@ public class Constants {
 	
 	public static final double TIME_STEP = WAV_SAMPLE_RATE / WAV_BLOCK_SIZE;
 	
+	public static final double NOTE_THRESHOLD = 4/75; //threshold to register note frequencies as valid melody notes
+	
+	
 }

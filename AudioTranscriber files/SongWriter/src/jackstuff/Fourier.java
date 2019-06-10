@@ -22,17 +22,17 @@ public class Fourier {
 		FileInputStream input = new FileInputStream(filepath);
 		
 		//Number of samples to take (higher number more accurate but slower
-		int numsamples = Constants.numsamples;
-		//Sample rate of the file (total frequency range is 1/samplerate)
-		int samplerate = Constants.samplerate;
+		int WAV_BLOCK_SIZEs = Constants.WAV_BLOCK_SIZE;
+		//Sample rate of the file (total frequency range is 1/WAV_SAMPLE_RATE)
+		int WAV_SAMPLE_RATE = Constants.WAV_SAMPLE_RATE;
 		//Puts the audio file into something readable by the FFT
 		WaveDecoder decoder = new WaveDecoder(input);
 		//Contains all the samples within the entire file
 		ArrayList<Float> allSamples = new ArrayList<Float>( );
 		//Contains the aformentioned samples, but in a format that FFT will take
-		float[] samples = new float[numsamples];
+		float[] samples = new float[WAV_BLOCK_SIZEs];
 		//Actual instance of the transform
-		FFT fft = new FFT(numsamples, samplerate );
+		FFT fft = new FFT(WAV_BLOCK_SIZEs, WAV_SAMPLE_RATE );
 		//Arraylist containing arraylists full of frequencies for each 44t of a second
 		ArrayList<ArrayList<Integer>> frames = new ArrayList<ArrayList<Integer>>();
 		//Arraylist containing frequencies, that we add to Frames in order to output a pack of frequencies
@@ -139,7 +139,7 @@ public class Fourier {
 			median = ArrayUnpacking.median(temp);
 			
 				
-			average[n] = median + (storeval * Constants.threshold);
+			average[n] = median + (storeval * Constants.NOTE_THRESHOLD);
 		}
 		
 		
@@ -159,8 +159,8 @@ public class Fourier {
 				ArrayList <Integer> indices = ArrayUnpacking.getIndices();
 //				System.out.println("Indices: " + indices.size());
 				for(int i = 0;i < indices.size(); i++) {
-//				System.out.println("Approx Frequency of Peak " + (i+1) + ": " + (indices.get(i) * samplerate / numsamples));
-				notefreqs.add(indices.get(i) * samplerate / numsamples);
+//				System.out.println("Approx Frequency of Peak " + (i+1) + ": " + (indices.get(i) * WAV_SAMPLE_RATE / WAV_BLOCK_SIZEs));
+				notefreqs.add(indices.get(i) * WAV_SAMPLE_RATE / WAV_BLOCK_SIZEs);
 				}
 				
 				if (notefreqs.size() == 0) {
