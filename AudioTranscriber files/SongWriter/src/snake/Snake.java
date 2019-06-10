@@ -427,6 +427,7 @@ public class Snake extends JPanel implements ActionListener {
 	
 		}
 	}
+	
 				
 					
 	
