@@ -6,7 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="AudioTranscriber files/ae-awt.jar"/>
 	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/jl1.0.jar"/>
 	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/jlayer-1.0.1.jar"/>
 	<classpathentry kind="lib" path="AudioTranscriber files/audio-analysis-master/audio-analysis-master/lib/mp3spi1.9.4.jar"/>
