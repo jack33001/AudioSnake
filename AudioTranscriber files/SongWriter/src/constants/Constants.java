@@ -3,7 +3,6 @@ package constants;
 //store all program constants here
 
 public class Constants {
-	public static final double TIME_STEP = 0.01;
 	public static final int NUM_NOTES = 85;
 	
 	public static final String WAVFILE_LOCATION = "samples/Superstition.wav";
@@ -22,5 +21,7 @@ public class Constants {
 	public static final double PULSE_FACTOR = 3;
 	public static final int FADE_CONST = 10;
 	public static final int baseSnakeSize = 5;
+	
+	public static final double TIME_STEP = WAV_SAMPLE_RATE / WAV_BLOCK_SIZE;
 	
 }

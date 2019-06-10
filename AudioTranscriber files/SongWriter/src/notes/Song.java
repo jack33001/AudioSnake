@@ -17,4 +17,13 @@ public class Song {
 	public int[][] getSongTable() {
 		return songTable;
 	}
+	
+	public int[] getNotesAt(double time) {
+		for (int i = 0; i < songTable.length; i++) {
+			if (time < i*Constants.TIME_STEP) {
+				return songTable[i];
+			}
+		}
+		return songTable[0];
+	}
 }
