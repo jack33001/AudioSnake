@@ -271,7 +271,7 @@ public class Snake extends JPanel implements ActionListener {
 				}
 				
 			}
-		}
+		
 		
 		
 		
@@ -348,10 +348,12 @@ public class Snake extends JPanel implements ActionListener {
 		}
 		
 			
-		if (x < 0||x > boardSizex - 40)
+		if (x < 0||x > boardSizex - 40) {
 			velX = -velX;
-		if (y < 0||y > boardSizey - 40)
+		}
+		if (y < 0||y > boardSizey - 40) {
 			velY = -velY;
+		}
 		
 		double xSqr = velX * velX;
 		double ySqr = velY * velY;
@@ -412,6 +414,8 @@ public class Snake extends JPanel implements ActionListener {
 		repaint();
 	
 		}
+				
+					
 	
 		
 	public void startSnake()
