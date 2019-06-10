@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 import constants.Constants;
 import notes.BPMDetector;
+import notes.Song;
 
 public class Snake extends JPanel implements ActionListener {
 	
@@ -41,9 +42,13 @@ public class Snake extends JPanel implements ActionListener {
 	BPMDetector myDetector;
 	long start;
 	int loopCounter = 0;
+	double colorChange = 0.1;
+	int noteCounter = 0;
+	int[][] bigArray;
 	
-	public Snake(BPMDetector myDetector) {
+	public Snake(BPMDetector myDetector, Song mySong) {
 		this.myDetector = myDetector;
+		bigArray = mySong.getSongTable();
 		
 		int sum = 0;
 		int count = 0;
@@ -63,7 +68,11 @@ public class Snake extends JPanel implements ActionListener {
 	{
 		Color mySnake = new Color(red, green, blue);
 		g.setColor(mySnake);
+<<<<<<< HEAD
+		g.fillOval((int) (x - snakeWidth/2), (int) (y - snakeLength/2), snakeWidth, snakeLength);
+=======
 		g.fillRect((int) x - snakeWidth/2, (int) y - snakeLength/2, snakeWidth, snakeLength);
+>>>>>>> 9a3903639c5d770fc6e1c6bbb37954ee05c3ad4b
 		
 		tm.start();
 	}
@@ -86,6 +95,189 @@ public class Snake extends JPanel implements ActionListener {
 		
 		accX = Math.random() * 0.4 - 0.2;
 		velX = velX + accX;
+		
+		
+		//COLOR//
+		
+		for (int i = 0; i < bigArray.length; i++) {
+			for (int j = 0; j < bigArray[i].length; j++) {
+				if (bigArray[i][j] == 1) {
+				noteCounter = j;
+				
+				if (noteCounter % 12 == 0) {	//c is yellow (255-255-0)
+					if (red < 254) {
+						red += colorChange;
+					}
+					if (green < 254) {	
+						green += colorChange;
+					}
+					if (blue > 0) {
+						blue -= colorChange;
+					}
+					
+				if (noteCounter % 12 == 1) {	//c# is yellow-green (102 - 255 - 102)
+					if (red < 102) {
+						red += colorChange;
+					}
+					if (red > 102) {
+						red -= colorChange;
+					}
+					if (green < 254) {
+						green += colorChange;
+					}
+					if (blue < 102) {
+						blue += colorChange;
+					}
+					if (blue > 102) {
+						blue -= colorChange;
+					}
+					
+				if (noteCounter % 12 == 2) {	//d is green (0 - 204 - 0)
+					if (red > 0) {
+						red -= colorChange;
+					}
+					if (blue < 204) {
+						blue += colorChange;
+					}
+					if (green > 204) {
+						green -= colorChange;
+					}
+					if (blue > 0) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 3) {	//d# is green-blue (51 - 153 - 255)
+					if (red < 51) {
+						red += colorChange;
+					}
+					if (red > 51) {
+						red -= colorChange;
+					}
+					if (green < 153) {
+						green += colorChange;
+					}
+					if (green > 153) {
+						green -= colorChange;
+					}
+					if (blue < 254) {
+						blue += colorChange;
+					}
+				if (noteCounter % 12 == 4) {	//e is blue (0 - 0 - 255)
+					if (red > 0) {
+						red -= colorChange;
+					}
+					if (green > 0) {
+						green -= colorChange;
+					}
+					if (blue < 254) {
+						blue += colorChange;
+					}
+				if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
+					if (red > 0) {
+						red -= colorChange;
+					}
+					if (green > 0) {
+						green -= colorChange;
+					}
+					if (blue < 153) {
+						blue += colorChange;
+					}
+					if (blue > 153) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 6) {	//f# is dark dark blue (0 - 0 - 200)
+					if (red > 0) {
+						red -= colorChange;
+					}
+					if (green > 0) {
+						green -= colorChange;
+					}
+					if (blue < 200) {
+						blue += colorChange;
+					}
+					if (blue > 200) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 7) { //g is violet (102 - 0 - 153)
+					if (red < 102) {
+						red += colorChange;
+					}
+					if (red > 102) {
+						red -= colorChange;
+					}
+					if (green > 1) {
+						green -= colorChange;
+					}
+					if (blue < 153) {
+						blue += colorChange;
+					if (blue > 153) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 8) {	//g# (209 - 0 - 190)
+					if (red < 209) {
+						red += colorChange;
+					}
+					if (red > 209) {
+						red -= colorChange;
+					}
+					if (green > 0) {
+						green -= colorChange;
+					}
+					if (blue > 190) {
+						blue -= colorChange;
+					}
+					if (blue < 190) {
+						blue += colorChange;
+					}
+				if (noteCounter % 12 == 9) {		//a is red (255-0-0)
+					if (red < 255) {
+						red += colorChange;
+					}
+					if (green > 0) {
+						green -= colorChange;
+					}
+					if (blue > 0) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 10) {		//a# (255 - 153 - 51)
+					if (red < 255) {
+						red += colorChange;
+					}
+					if (green < 153) {
+						green += colorChange;
+					}
+					if (green > 153) {
+						green -= colorChange;
+					}
+					if (blue < 51) {
+						blue += colorChange;
+					}
+					if (blue > 51) {
+						blue -= colorChange;
+					}
+				if (noteCounter % 12 == 11) {		//b is orange (255-102-0)
+					if (red < 255) {
+						red += colorChange;
+					}
+					if (green < 102) {
+						red += colorChange;
+					}
+					if (green > 102) {
+						red -= colorChange;
+					}
+					if (blue > 0) {
+						blue += colorChange;
+					}
+						
+				}
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
 		
 		//randomly change color
 		/*double redRando = Math.random() * 11.0 - 5.0;
