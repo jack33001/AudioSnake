@@ -22,7 +22,6 @@ public class Constants {
 	public static final double PULSE_FACTOR = 4;
 	public static final int FADE_CONST = 10;
 	public static final int baseSnakeSize = 8;
-	public static final double SPEED_CONSTANT = 0.01;
 	
 	public static final double TIME_STEP = (double)WAV_BLOCK_SIZE / WAV_SAMPLE_RATE;
 	

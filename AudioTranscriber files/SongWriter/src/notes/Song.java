@@ -21,6 +21,8 @@ public class Song {
 	public int[] getNotesAt(double time) {
 		for (int i = 0; i < songTable.length; i++) {
 			if (i*Constants.TIME_STEP > time) {
+				for (int j : songTable[i]) System.out.print(j);
+				System.out.println();
 				return songTable[i];
 			}
 		}
