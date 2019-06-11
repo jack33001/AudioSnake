@@ -21,10 +21,10 @@ public class Song {
 	public int[] getNotesAt(double time) {
 		for (int i = 0; i < songTable.length; i++) {
 			if (i*Constants.TIME_STEP > time) {
-				System.out.println(i + " " + time);
+				//System.out.println(i + " " + time);
 				return songTable[i];
 			}
 		}
-		return songTable[0];
+	return songTable[0];
 	}
 }

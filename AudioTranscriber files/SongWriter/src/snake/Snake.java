@@ -23,7 +23,7 @@ public class Snake extends JPanel implements ActionListener {
 	int snakeLength;
 	double averageEnergy;
 	
-	Timer tm = new Timer(10, this);		//5 milliseconds
+	Timer tm = new Timer(1, this);		//5 milliseconds
 	double x = 500;
 	double y = 500;
 	double velX = 0;
@@ -41,7 +41,7 @@ public class Snake extends JPanel implements ActionListener {
 	BPMDetector myDetector;
 	long start;
 	int loopCounter = 0;
-	double colorChange = 0.1;
+	int colorChange = 1;
 	int noteCounter = 0;
 	Song mySong;
 	
@@ -80,7 +80,8 @@ public class Snake extends JPanel implements ActionListener {
 		
 		myDetector.getLocalInstantEnergy(currentTime);
 		int currentTempo = myDetector.getTempoAt(currentTime);
-		speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
+		//speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
+		speed = (currentTempo / 100.0);
 		
 		//update snake size values based on energy values.
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
@@ -99,7 +100,7 @@ public class Snake extends JPanel implements ActionListener {
 		for (int j = 0; j < mySong.getNotesAt(currentTime).length; j++) {
 			if (mySong.getNotesAt(currentTime)[j] == 1) {
 			noteCounter = j;
-			
+			  
 			if (noteCounter % 12 == 0) {	//c is yellow (255-255-0)
 				if (red < 254) {
 					red += colorChange;
@@ -279,6 +280,7 @@ public class Snake extends JPanel implements ActionListener {
 			}
 			
 			}
+		}
 		
 		
 		
@@ -331,9 +333,9 @@ public class Snake extends JPanel implements ActionListener {
 		}*/
 		
 		if (y < 200) {
-			accY += 0.01;
+			accY += 0.0001;
 			if (y < 200) {
-				velY += 0.05;
+				velY += 0.005;
 			}
 		}
 		if (y > 800) {
@@ -343,9 +345,9 @@ public class Snake extends JPanel implements ActionListener {
 			}
 		}
 		if (x < 200) {
-			accX += 0.01;
+			accX += 0.0001;
 			if (x < 200) {
-				velX += 0.05;
+				velX += 0.005;
 			}
 		}
 		if (x > 800) {
@@ -401,20 +403,23 @@ public class Snake extends JPanel implements ActionListener {
 		}
 		
 		
-		//System.out.println(Math.sqrt(xSqr + ySqr));
+		//System.out.println("real speed:" + Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
-		System.out.println("Current size: " + snakeWidth);
-		System.out.println("Current tempo: " + currentTempo);
-		System.out.println("Current speed: " + speed);
-		System.out.println("Current color: " + red + " " + green + " " + blue + "\n");
+		//System.out.println("Current size: " + snakeWidth);
+		//System.out.println("Current tempo: " + currentTempo);
+		//System.out.println("Speed I want: " + speed);
+		//System.out.println("uh j: " + j);
+		//System.out.println("velY:" + velY);
+		//System.out.println("velX:" + velX);
+		//System.out.println("Current color: " + red + " " + green + " " + blue + "\n");
 		
 	
 		//System.out.println((System.currentTimeMillis() - start)/1000.0);
 		//System.out.println("adder:" + greenRando);
-		//System.out.println("red:" + redRando);
-		//System.out.println("green:" + greenRando);
-		//System.out.println("blue:" + blueRando);
+		System.out.println("red:" + red);
+		System.out.println("green:" + green);
+		System.out.println("blue:" + blue);
 		
 		
 		y = y + velY;
@@ -424,7 +429,7 @@ public class Snake extends JPanel implements ActionListener {
 		
 	
 		}
-	}
+	
 	
 				
 					

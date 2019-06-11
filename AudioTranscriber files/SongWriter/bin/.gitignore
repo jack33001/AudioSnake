@@ -1,6 +1,8 @@
-/notes/
+/.DS_Store
+/constants/
 /jackstuff/
 /main/
-/userio/
+/notes/
 /snake/
-/constants/
+/userio/
+/util/
