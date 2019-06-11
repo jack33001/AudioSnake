@@ -82,7 +82,7 @@ public class Snake extends JPanel implements ActionListener {
 		myDetector.getLocalInstantEnergy(currentTime);
 		int currentTempo = myDetector.getTempoAt(currentTime);
 		//speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
-		speed = (currentTempo / 100.0);
+		speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*((double)snakeWidth/baseSnakeWidth);
 		
 		//update snake size values based on energy values.
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
