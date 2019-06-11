@@ -22,17 +22,14 @@ public class Constants {
 	public static final double PULSE_FACTOR = 3;
 	public static final int FADE_CONST = 10;
 	public static final int baseSnakeSize = 5;
-	public static final double SPEED_CONSTANT = 0.5;
+	public static final double SPEED_CONSTANT = 0.01;
 	
 	public static final double TIME_STEP = WAV_SAMPLE_RATE / WAV_BLOCK_SIZE;
 	
-	public static final double NOTE_THRESHOLD = 4/75; //threshold to register note frequencies as valid melody notes
-	
+	public static final double NOTE_THRESHOLD = 4.75; //threshold to register note frequencies as valid melody notes	
 	/*
 	 * Determined constant values:
 	 * Hells Bells: 5.5
 	 * Superstition: 4.75
 	 */
-	
-	
 }
