@@ -19,12 +19,18 @@ public class Constants {
 	 */
 	
 	public static final int TEMPO_BUFFER_LENGTH = 11; //number of values to find median of for bpm array. Should be an odd number
-	public static final double PULSE_FACTOR = 3;
+	public static final double PULSE_FACTOR = 4;
 	public static final int FADE_CONST = 10;
+<<<<<<< HEAD
 	public static final int baseSnakeSize = 5;
 	public static final double SPEED_CONSTANT = 1;
 	
 	public static final double TIME_STEP = (double) WAV_BLOCK_SIZE / WAV_SAMPLE_RATE;
+=======
+	public static final int baseSnakeSize = 8;
+	
+	public static final double TIME_STEP = (double)WAV_BLOCK_SIZE / WAV_SAMPLE_RATE;
+>>>>>>> 3a00be5c8f965ae696a52d3920a8ddbf59edf783
 	
 	public static final double NOTE_THRESHOLD = 4.75; //threshold to register note frequencies as valid melody notes	
 	/*
