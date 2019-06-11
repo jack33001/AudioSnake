@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -68,11 +67,9 @@ public class Snake extends JPanel implements ActionListener {
 	{
 		Color mySnake = new Color(red, green, blue);
 		g.setColor(mySnake);
-
+		
+		//g.fillRect((int) (x - snakeWidth/2), (int) (y - snakeLength/2), snakeWidth, snakeLength);
 		g.fillOval((int) (x - snakeWidth/2), (int) (y - snakeLength/2), snakeWidth, snakeLength);
-
-		g.fillRect((int) x - snakeWidth/2, (int) y - snakeLength/2, snakeWidth, snakeLength);
-
 		
 		tm.start();
 	}
@@ -83,7 +80,7 @@ public class Snake extends JPanel implements ActionListener {
 		
 		myDetector.getLocalInstantEnergy(currentTime);
 		int currentTempo = myDetector.getTempoAt(currentTime);
-		speed = Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
+		speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
 		
 		//update snake size values based on energy values.
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
@@ -407,9 +404,10 @@ public class Snake extends JPanel implements ActionListener {
 		//System.out.println(Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
-		System.out.println("Current size: " + snakeWidth + ", " + (myDetector.getLocalInstantEnergy(currentTime) + " " + averageEnergy));
+		System.out.println("Current size: " + snakeWidth);
 		System.out.println("Current tempo: " + currentTempo);
-		System.out.println("Current speed: " + speed + "\n");
+		System.out.println("Current speed: " + speed);
+		System.out.println("Current color: " + red + " " + green + " " + blue + "\n");
 		
 	
 		//System.out.println((System.currentTimeMillis() - start)/1000.0);

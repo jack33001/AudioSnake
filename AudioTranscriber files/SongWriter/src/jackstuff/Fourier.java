@@ -1,21 +1,17 @@
 package jackstuff;
 
-import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import constants.Constants;
-import util.Plot2D;
-
 
 public class Fourier {
 	public static float storeval;
 
 	public static ArrayList<ArrayList<Integer>> FFTFile(String filepath) throws FileNotFoundException, Exception
 	{
+		System.out.println("Running Fourier transformation calculations...");
 		//File input
 //		String filepath = "C:\\Users\\butlerj2906\\Desktop\\AudioTranscriber files\\CSharpMajorScale.wav";
 		
@@ -65,12 +61,13 @@ public class Fourier {
 		int repetitions = samples.length / FFT.timeSize;
 		int startpoint =  0;
 		
-		
 	for (int k = 0; k < repetitions; k++) {
 		
 		ArrayList<Integer> notefreqs = new ArrayList<Integer>();
 		
-//		System.out.println("Iteration " + (k+1));
+		if (k % 1000 == 0) {
+			System.out.printf("Ran FFT iteration %d of %d\n", k, repetitions);
+		}
 		
 		float[] sampleschunk = Arrays.copyOfRange(samples,startpoint,startpoint+FFT.timeSize);
 				

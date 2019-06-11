@@ -4,43 +4,14 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.PrintStream;
-
-
-
-
-
-
-
-
-
-
-
 
 public class WaveDecoder
 {
-  private final float MAX_VALUE = 3.051851E-5F;
   
-
-
-
   private final EndianDataInputStream in;
-  
-
-
   private final int channels;
-  
-
-
   private final float sampleRate;
-  
-
-
-  private final int size;
-  
-
-
-
+   
   public WaveDecoder(InputStream stream)
     throws Exception
   {
@@ -79,17 +50,7 @@ public class WaveDecoder
     if (!in.read4ByteString().equals("data")) {
       throw new RuntimeException("expected data tag");
     }
-    size = in.readIntLittleEndian();
   }
-  
-
-
-
-
-
-
-
-
 
   public int readSamples(float[] samples)
   {

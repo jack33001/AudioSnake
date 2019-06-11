@@ -19,13 +19,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import constants.Constants;
 import jackstuff.Fourier;
 import notes.BPMDetector;
 import notes.Song;
 import snake.Snake;
-import util.AePlayWave;
 
+@SuppressWarnings("serial")
 public class MusicPlayer extends JPanel implements ActionListener {
 	JFrame window = new JFrame("Selecta nice song pl0x =) ");
 	JLabel info = new JLabel("pl0x don't play the next song until the first song is over.");
@@ -33,6 +32,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 	JButton playButton = new JButton("Play");
 	// JFrame stopButton = new JFrame("Stop");
 	Font customFont = new Font("", Font.BOLD, 20);
+	@SuppressWarnings("rawtypes")
 	JComboBox list = new JComboBox();
 	JFileChooser browser = new JFileChooser();
 	FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV Sound", "wav");
@@ -74,6 +74,7 @@ public class MusicPlayer extends JPanel implements ActionListener {
 		window.setVisible(true);
 	}
 
+	@SuppressWarnings({ "unchecked", "static-access" })
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource()==addButton)
@@ -95,9 +96,13 @@ public class MusicPlayer extends JPanel implements ActionListener {
 			try {
 			
 				{
+					double programStartTime = System.currentTimeMillis() / 1000.0;
+					System.out.println("Starting calculations! Don't press any more buttons!");
 					Song music = new Song(Fourier.FFTFile(selectedFile.toString()));
 					BPMDetector detector = new BPMDetector(selectedFile.toString()); //create BPMDetector object (automatically finds all beats)
 					Snake snake = new Snake(detector, music); //create snake object
+					
+					System.out.println("Finished calculations in " + (System.currentTimeMillis() / 1000.0 - programStartTime) + " seconds.\n");
 				    					
 					sound = new File(musics[list.getSelectedIndex()]);
 					ais = AudioSystem.getAudioInputStream(sound);

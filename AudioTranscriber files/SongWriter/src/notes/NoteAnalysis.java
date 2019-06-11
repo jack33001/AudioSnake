@@ -43,26 +43,30 @@ public class NoteAnalysis {
 			if (noteDist < minDist) { //if a sharp frequency is closer than the whole note, must be sharp/flat
 				//System.out.println(minNote);
 				
-				if (minNote - Math.round(minNote) < 0) { //make sure we only get sharp notes
+				if (minNote < Math.round(minNote)) { //make sure we only get sharp notes
 					if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
-					System.out.println((char)(64 + minFreq) + "#" + (Math.round(minNote)));
+					if (minFreq == 0) {
+						minFreq = baseFrequencies.length - 1;
+						minNote -= 1;
+					}
+					//System.out.println((char)(64 + minFreq) + "#" + (Math.round(minNote)));
 					return (char)(64 + minFreq) + "#" + (Math.round(minNote));
 				}
 				else {
 					if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
-					System.out.println((char)(65 + minFreq) + "#" + (Math.round(minNote)));
+					//System.out.println((char)(65 + minFreq) + "#" + (Math.round(minNote)));
 					return (char)(65 + minFreq) + "#" + (Math.round(minNote));
 				}
 			}
 		}
 		
 		if (minNote > Constants.HIGHEST_OCTAVE) minNote = Constants.HIGHEST_OCTAVE;
-		System.out.println((char)(65 + minFreq) + "" + (Math.round(minNote)));
+		//System.out.println((char)(65 + minFreq) + "" + (Math.round(minNote)));
 		return (char)(65 + minFreq) + "" + (Math.round(minNote));
 	}
 	
 	public static int[] getNotes(ArrayList<Integer> frequencies) {
-		int[] noteArr = new int[Constants.NUM_NOTES];
+		int[] noteArr = new int[Constants.NUM_NOTES + 12];
 		for (int i = 0; i < noteArr.length; i++) noteArr[i] = 0;
 		
 		for (int i = 0; i < frequencies.size(); i++) {
