@@ -141,6 +141,9 @@ public class Snake extends JPanel implements ActionListener {
 				if (green > 204) {
 					green -= colorChange;
 				}
+				if (green < 204) {
+					green += colorChange;
+				}
 				if (blue > 0) {
 					blue -= colorChange;
 				}
@@ -166,9 +169,9 @@ public class Snake extends JPanel implements ActionListener {
 				if (red > 0) {
 					red -= colorChange;
 				}
-				if (green > 0) {
-					green -= colorChange;
-				}
+				//if (green > 0) {
+				//	green -= colorChange;
+				//}
 				if (blue < 254) {
 					blue += colorChange;
 				}
@@ -177,9 +180,9 @@ public class Snake extends JPanel implements ActionListener {
 				if (red > 0) {
 					red -= colorChange;
 				}
-				if (green > 0) {
-					green -= colorChange;
-				}
+				//if (green > 0) {
+				//	green -= colorChange;
+				//}
 				if (blue < 153) {
 					blue += colorChange;
 				}
@@ -278,7 +281,9 @@ public class Snake extends JPanel implements ActionListener {
 					blue += colorChange;
 				}	
 			}
-			
+			if (red > 255) red = 255;
+			if (blue > 255) blue = 255;
+			if (green > 255) green = 255;
 			}
 
 		}
@@ -397,12 +402,12 @@ public class Snake extends JPanel implements ActionListener {
 		}
 		
 		
-		System.out.println("real speed:" + Math.sqrt(xSqr + ySqr));
+		//System.out.println("real speed:" + Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
 		//System.out.println("Current size: " + snakeWidth);
 		//System.out.println("Current tempo: " + currentTempo);
-		System.out.println("Speed I want: " + speed);
+		//System.out.println("Speed I want: " + speed);
 		//System.out.println("uh j: " + j);
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);

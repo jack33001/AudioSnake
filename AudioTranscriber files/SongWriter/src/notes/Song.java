@@ -24,8 +24,8 @@ public class Song {
 
 				//System.out.println(i + " " + time);
 
-				//for (int j : songTable[i]) System.out.print(j);
-				//System.out.println();
+				for (int j : songTable[i]) System.out.print(j);
+				System.out.println();
 
 				return songTable[i];
 			}
