@@ -13,6 +13,7 @@ import constants.Constants;
 import notes.BPMDetector;
 import notes.Song;
 
+@SuppressWarnings("serial")
 public class Snake extends JPanel implements ActionListener {
 	
 	static int boardSizex = 1000;
@@ -95,7 +96,6 @@ public class Snake extends JPanel implements ActionListener {
 		
 		
 		//COLOR//
-		
 		for (int j = 0; j < mySong.getNotesAt(currentTime).length; j++) {
 			if (mySong.getNotesAt(currentTime)[j] == 1) {
 			noteCounter = j;
@@ -279,14 +279,7 @@ public class Snake extends JPanel implements ActionListener {
 			}
 			
 			}
-		
-		
-		
-		
-		
-		
-		
-		
+
 		//randomly change color
 		/*double redRando = Math.random() * 11.0 - 5.0;
 		if (redRando < 0) {
