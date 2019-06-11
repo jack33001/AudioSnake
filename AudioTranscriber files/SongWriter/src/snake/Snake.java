@@ -132,9 +132,9 @@ public class Snake extends JPanel implements ActionListener {
 			}
 				
 			if (noteCounter % 12 == 2) {	//d is green (0 - 204 - 0)
-				if (red > 0) {
-					red -= colorChange;
-				}
+				//if (red > 0) {
+				//	red -= colorChange;
+				//}
 				if (blue < 204) {
 					blue += colorChange;
 				}
@@ -181,7 +181,7 @@ public class Snake extends JPanel implements ActionListener {
 					red -= colorChange;
 				}
 				//if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
-				//	green -= colorChange;
+				//		green -= colorChange;
 				//}
 				if (blue < 153) {
 					blue += colorChange;
