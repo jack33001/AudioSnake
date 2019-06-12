@@ -24,7 +24,7 @@ public class Snake extends JPanel implements ActionListener {
 	int snakeLength;
 	double averageEnergy;
 	
-	Timer tm = new Timer(10, this);		//5 milliseconds
+	Timer tm = new Timer(10, this);		//10 milliseconds
 	double x = 500;
 	double y = 500;
 	double velX = 0;
@@ -133,9 +133,9 @@ public class Snake extends JPanel implements ActionListener {
 			}
 				
 			if (noteCounter % 12 == 2) {	//d is green (0 - 204 - 0)
-				if (red > 0) {
-					red -= colorChange;
-				}
+				//if (red > 0) {
+				//	red -= colorChange;
+				//}
 				if (blue < 204) {
 					blue += colorChange;
 				}
@@ -167,30 +167,31 @@ public class Snake extends JPanel implements ActionListener {
 				}
 			}
 			if (noteCounter % 12 == 4) {	//e is blue (0 - 0 - 255)
-				/*if (red > 0) {
+				if (red > 0) {
 					red -= colorChange;
-				}*/
-				if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
-					green -= colorChange;
 				}
+				//if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
+				//	green -= colorChange;
+				//}
 				if (blue < 254) {
 					blue += colorChange;
 				}
 			}
-			/*if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
+			if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
 				if (red > 0) {
 					red -= colorChange;
 				}
-				if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
-					green -= colorChange;
-				}
+				//if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
+				//		green -= colorChange;
+				//}
+
 				if (blue < 153) {
 					blue += colorChange;
 				}
 				if (blue > 153) {
 					blue -= colorChange;
 				}
-			}*/
+			}
 			if (noteCounter % 12 == 6) {	//f# is dark dark blue (0 - 0 - 200)
 				if (red > 0) {
 					red -= colorChange;
@@ -291,7 +292,38 @@ public class Snake extends JPanel implements ActionListener {
 
 		//AVOID EDGES
 		
+		/*if (y < 200) {
+		accY += 0.01;
+		if (y < 200) {
+			velY += 0.5;
+		}
+	}
+	if (y > 800) {
+		accY -= 0.01;
+		if (y > 800) {
+			velY -= 0.05;
+		}
+	}
+	if (x < 200) {
+		accX += 0.01;
+		if (x < 200) {
+			velX += 0.5;
+		}
+	}
+	if (x > 800) {
+		accX -= 0.01;
+		if (x > 800) {
+			velX -= 0.05;
+		}
+	}
+	
 		
+	if (x < 0||x > boardSizex - 40) {
+		velX = -velX;
+	}
+	if (y < 0||y > boardSizey - 40) {
+		velY = -velY;
+	}*/
 		
 		if (x < 0) {
 			x += boardSizex;

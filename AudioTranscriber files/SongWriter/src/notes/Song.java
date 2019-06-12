@@ -15,7 +15,7 @@ public class Song {
 	}
 	
 	public int[][] getSongTable() {
-		//return songTable;
+		return songTable;
 	}
 	
 	public int[] getNotesAt(double time) {
