@@ -24,7 +24,7 @@ public class Snake extends JPanel implements ActionListener {
 	int snakeLength;
 	double averageEnergy;
 	
-	Timer tm = new Timer(5, this);		//5 milliseconds
+	Timer tm = new Timer(10, this);		//5 milliseconds
 	double x = 500;
 	double y = 500;
 	double velX = 0;
@@ -83,6 +83,7 @@ public class Snake extends JPanel implements ActionListener {
 		int currentTempo = myDetector.getTempoAt(currentTime);
 		//speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*(snakeWidth/baseSnakeWidth);
 		speed = Constants.SPEED_CONSTANT*Math.pow(currentTempo / 100.0, 2)*((double)snakeWidth/baseSnakeWidth);
+		//speed = (currentTempo / 100.0) * (Constants.SPEED_CONSTANT);
 		
 		//update snake size values based on energy values.
 		double energyProp = myDetector.getLocalInstantEnergy(currentTime) / averageEnergy;
@@ -166,30 +167,30 @@ public class Snake extends JPanel implements ActionListener {
 				}
 			}
 			if (noteCounter % 12 == 4) {	//e is blue (0 - 0 - 255)
-				if (red > 0) {
+				/*if (red > 0) {
 					red -= colorChange;
+				}*/
+				if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
+					green -= colorChange;
 				}
-				//if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
-				//	green -= colorChange;
-				//}
 				if (blue < 254) {
 					blue += colorChange;
 				}
 			}
-			if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
+			/*if (noteCounter % 12 == 5) {	//f is indigo (0 - 0 -153)
 				if (red > 0) {
 					red -= colorChange;
 				}
-				//if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
-				//	green -= colorChange;
-				//}
+				if (green > 0) {			//COMMENT THIS IN FOR SUPERSTITION
+					green -= colorChange;
+				}
 				if (blue < 153) {
 					blue += colorChange;
 				}
 				if (blue > 153) {
 					blue -= colorChange;
 				}
-			}
+			}*/
 			if (noteCounter % 12 == 6) {	//f# is dark dark blue (0 - 0 - 200)
 				if (red > 0) {
 					red -= colorChange;
@@ -288,80 +289,21 @@ public class Snake extends JPanel implements ActionListener {
 
 		}
 
-		//randomly change color
-		/*double redRando = Math.random() * 11.0 - 5.0;
-		if (redRando < 0) {
-			red += 0.01;
-		}
-		if (redRando > 0) {
-			red -= 0.01;
-		}
-		if (red < 10) {
-			red += 0.02;
-		}
-		if (red > 240) {
-			red -= 0.02;
-		}
+		//AVOID EDGES
 		
-		double greenRando = Math.random() - 0.5;
-		if (greenRando > 0) {
-			green += 0.01;
-		}
-		if (greenRando < 0) {
-			green -= 0.01;
-		}
-		if (green < 10) {
-			green += 0.02;
-		}
-		if (green > 240) {
-			green -= 0.02;
-		}
 		
-		double blueRando = Math.random() - 0.5;
-		if (blueRando > 0) {
-			blue += 0.01;
-		}
-		if (blueRando < 0) {
-			blue -= 0.01;
-		}
-		if (blue < 10) {
-			blue += 0.02;
-		}
-		if (blue > 240) {
-			blue -= 0.02;
-		}*/
 		
-		if (y < 200) {
-			accY += 0.01;
-			if (y < 200) {
-				velY += 0.5;
-			}
+		if (x < 0) {
+			x += boardSizex;
 		}
-		if (y > 800) {
-			accY -= 0.01;
-			if (y > 800) {
-				velY -= 0.05;
-			}
+		if (x > boardSizex - Constants.baseSnakeSize) {
+			x -= boardSizex;
 		}
-		if (x < 200) {
-			accX += 0.01;
-			if (x < 200) {
-				velX += 0.5;
-			}
+		if (y < 0) {
+			y += boardSizey;
 		}
-		if (x > 800) {
-			accX -= 0.01;
-			if (x > 800) {
-				velX -= 0.05;
-			}
-		}
-		
-			
-		if (x < 0||x > boardSizex - 40) {
-			velX = -velX;
-		}
-		if (y < 0||y > boardSizey - 40) {
-			velY = -velY;
+		if (y > boardSizey - Constants.baseSnakeSize) {
+			y -= boardSizey;
 		}
 		
 		double xSqr = velX * velX;
@@ -402,12 +344,12 @@ public class Snake extends JPanel implements ActionListener {
 		}
 		
 		
-		//System.out.println("real speed:" + Math.sqrt(xSqr + ySqr));
+		System.out.println("real speed:" + Math.sqrt(xSqr + ySqr));
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
 		//System.out.println("Current size: " + snakeWidth);
 		//System.out.println("Current tempo: " + currentTempo);
-		//System.out.println("Speed I want: " + speed);
+		System.out.println("Speed I want: " + speed);
 		//System.out.println("uh j: " + j);
 		//System.out.println("velY:" + velY);
 		//System.out.println("velX:" + velX);
@@ -428,10 +370,6 @@ public class Snake extends JPanel implements ActionListener {
 		
 	
 		}
-	
-	
-				
-					
 	
 		
 	public void startSnake()
